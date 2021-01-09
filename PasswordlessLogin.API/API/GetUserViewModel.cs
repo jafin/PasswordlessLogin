@@ -12,8 +12,8 @@ namespace SimpleIAM.PasswordlessLogin.API
         [JsonPropertyName("sub")]
         public string SubjectId { get; set; }
         public string Email { get; set; }
-        
+
         [JsonExtensionData]
-        public IDictionary<string, JToken> AdditionalProperties { get; set; }        
+        public IDictionary<string, JToken> AdditionalProperties { get; set; }
     }
 }

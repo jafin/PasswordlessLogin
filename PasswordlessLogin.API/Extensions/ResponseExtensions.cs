@@ -10,13 +10,13 @@ namespace SimpleIAM.PasswordlessLogin.API
     {
         public static JsonResult ToJsonResult(this WebStatus status)
         {
-            return new JsonResult(new { 
-                Message = status.Text, 
+            return new JsonResult(new {
+                Message = status.Text,
                 Messages = status.Messages,
                 HasError = status.HasError,
                 IsOK = status.IsOk
-            }) { 
-                StatusCode = (int)status.StatusCode 
+            }) {
+                StatusCode = (int)status.StatusCode
             };
         }
 

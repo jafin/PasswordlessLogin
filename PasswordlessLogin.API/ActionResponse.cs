@@ -36,8 +36,8 @@ namespace SimpleIAM.PasswordlessLogin.API
             // Extract error messages from model state. For form-level errors, use the key "_" instead of ""
             Errors = modelState
                 .ToDictionary(x => x.Key, x => x.Value.Errors.Select(e => e.ErrorMessage).ToArray())
-                .Where(em => em.Value.Count() > 0)
-                .ToDictionary(x => x.Key == "" ? "_" : x.Key, x => x.Value);
+                .Where(em => em.Value.Length > 0)
+                .ToDictionary(x => x.Key?.Length == 0 ? "_" : x.Key, x => x.Value);
 
             var kvp = Errors.FirstOrDefault();
             Message = kvp.Value.FirstOrDefault();

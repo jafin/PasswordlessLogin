@@ -10,6 +10,6 @@ namespace SimpleIAM.PasswordlessLogin.API
     public class PatchUserInputModel
     {
         [JsonExtensionData]
-        public IDictionary<string, JToken> Properties { get; set; }        
+        public IDictionary<string, JToken> Properties { get; set; }
     }
 }

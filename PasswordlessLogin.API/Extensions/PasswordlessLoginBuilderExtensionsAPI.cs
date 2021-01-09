@@ -15,7 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 throw new ArgumentNullException(nameof(builder));
             }
-     
+
             builder.Services.AddPasswordlessCorsPolicy(apiAllowedOrigins);
 
             return builder;

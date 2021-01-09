@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class PasswordlessLoginBuilderExtensionsSqlServer
     {
-        public static PasswordlessLoginBuilder AddSqlServer(this PasswordlessLoginBuilder builder, 
+        public static PasswordlessLoginBuilder AddSqlServer(this PasswordlessLoginBuilder builder,
             Action<DbContextOptionsBuilder> options,
             SqlServerPasswordlessDatabaseConfig config = null
             )

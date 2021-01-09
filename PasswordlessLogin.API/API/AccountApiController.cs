@@ -82,7 +82,7 @@ namespace SimpleIAM.PasswordlessLogin.API
             var response = await _passwordService.PasswordLastChangedAsync(subjectId);
             if(response.HasError)
             {
-                return Json(new { date = (DateTime?)null }); 
+                return Json(new { date = (DateTime?)null });
             }
             return Json(new { date = response.Result });
         }
@@ -168,7 +168,7 @@ namespace SimpleIAM.PasswordlessLogin.API
 
                 var removeStatus = await _passwordService.RemovePasswordAsync(user.SubjectId);
                 if (removeStatus.IsOk)
-                { 
+                {
                     await _eventNotificationService.NotifyEventAsync(user.Email, EventType.RemovePassword);
                     await _messageService.SendPasswordRemovedNoticeAsync(model.ApplicationId, user.Email);
                     return Ok();

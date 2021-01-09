@@ -66,7 +66,7 @@ namespace SimpleIAM.PasswordlessLogin.API
                 var status = await _authenticateOrchestrator.AuthenticateCodeAsync(model);
                 if (status.StatusCode == HttpStatusCode.Redirect)
                 {
-                    return NextUrlJsonResult(status.RedirectUrl); 
+                    return NextUrlJsonResult(status.RedirectUrl);
                 }
                 return status.ToJsonResult();
             }

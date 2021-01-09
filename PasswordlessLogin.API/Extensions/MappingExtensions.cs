@@ -47,7 +47,7 @@ namespace SimpleIAM.PasswordlessLogin.API
 
         public static string NormalizeEmptyString(string input)
         {
-            if(input == "")
+            if(input?.Length == 0)
             {
                 return null;
             }

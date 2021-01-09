@@ -14,14 +14,14 @@ namespace SimpleIAM.PasswordlessLogin.SqlServer
             var optionsBuilder = new DbContextOptionsBuilder<PasswordlessLoginDbContext>();
             var config = new SqlServerPasswordlessDatabaseConfig();
 
-            var connection = "(none)";            
+            var connection = "(none)";
 
             optionsBuilder.UseSqlServer(connection, b =>
             {
                 b.MigrationsAssembly("SimpleIAM.PasswordlessLogin.SqlServer");
                 b.MigrationsHistoryTable("__PasswordlessMigrationsHistory", config.Schema);
             });
-            
+
             return new SqlServerPasswordlessLoginDbContext(optionsBuilder.Options, config);
         }
     }
