@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using SimpleIAM.PasswordlessLogin.Configuration;
-using SimpleIAM.PasswordlessLogin.Extensions;
 using SimpleIAM.PasswordlessLogin.Orchestrators;
 using SimpleIAM.PasswordlessLogin.Services;
 using SimpleIAM.PasswordlessLogin.Services.EventNotification;
