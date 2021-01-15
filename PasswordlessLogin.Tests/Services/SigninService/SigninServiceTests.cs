@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
@@ -23,7 +22,7 @@ namespace PasswordlessLogin.Tests.Services.SigninService
         {
             string subjectId = Guid.NewGuid().ToString();
             var service = new PasswordlessSignInService(_httpContextAccessor);
-            var username = "user@domain.com";
+            const string username = "user@domain.com";
             var authenticationMethods = new List<string> {"pwd"};
             var authProps = new AuthenticationProperties();
 
