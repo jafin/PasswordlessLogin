@@ -66,10 +66,12 @@ class Build : NukeBuild
         .DependsOn(Compile)
         .Executes(() =>
         {
-            List<string> projects = new List<string>()
+            var projects = new List<string>
             {
                 "PasswordlessLogin", "PasswordlessLogin.API", "PasswordlessLogin.SqlServer", "PasswordlessLogin.MySql"
             };
+
+            EnsureCleanDirectory(ArtifactsDirectory);
 
             foreach (var project in projects)
             {
@@ -82,7 +84,8 @@ class Build : NukeBuild
                     //.SetDescription("Sample package produced by NUKE")
                     //.SetPackageTags("nuke demonstration c# library")
                     .SetNoDependencies(true)
-                    .SetOutputDirectory(ArtifactsDirectory));
+                    .SetOutputDirectory(ArtifactsDirectory)
+                );
             }
         });
 }
