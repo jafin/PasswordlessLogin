@@ -21,19 +21,42 @@ namespace SimpleIAM.PasswordlessLogin.Services.EventNotification
 
         public async Task<Status> NotifyEventAsync(string username, string eventType, string details = null)
         {
-            var entry = new EventLog()
+            var entry = new EventLog
             {
                 Time = DateTime.UtcNow,
                 Username = username,
                 EventType = eventType,
-                Details = details?.Substring(0, Math.Min(details.Length, 255)) // max 255 characters in this implementation
+                Details = details?.Substring(0,
+                    Math.Min(details.Length, 255)) // max 255 characters in this implementation
             };
             _context.Add(entry);
             var count = await _context.SaveChangesAsync();
-            if(count == 0)
+            if (count == 0)
             {
                 return Status.Error("Failed to save notification.");
             }
+
+            return Status.Success("Notification saved.");
+        }
+
+        public async Task<Status> NotifyEventAsync(NotifyEventModel notifyEvent)
+        {
+            var entry = new EventLog
+            {
+                Time = DateTime.UtcNow,
+                IpAddress = notifyEvent.IpAddress,
+                Username = notifyEvent.UserName,
+                EventType = notifyEvent.EventType,
+                Details = notifyEvent.Details?.Substring(0,
+                    Math.Min(notifyEvent.Details.Length, 255)) // max 255 characters in this implementation
+            };
+            _context.Add(entry);
+            var count = await _context.SaveChangesAsync();
+            if (count == 0)
+            {
+                return Status.Error("Failed to save notification.");
+            }
+
             return Status.Success("Notification saved.");
         }
     }
