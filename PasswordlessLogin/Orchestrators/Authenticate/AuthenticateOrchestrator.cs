@@ -47,6 +47,7 @@ namespace SimpleIAM.PasswordlessLogin.Orchestrators
         private readonly ISignInService _signInService;
         private readonly IApplicationService _applicationService;
         private readonly IApplicationLocalizer _localizer;
+        private IClientInfoHelper _clientInfoHelper;
 
         public AuthenticateOrchestrator(
             ILogger<AuthenticateOrchestrator> logger,
@@ -61,7 +62,8 @@ namespace SimpleIAM.PasswordlessLogin.Orchestrators
             ITrustedBrowserStore trustedBrowserStore,
             ISignInService signInService,
             IApplicationService applicationService,
-            IApplicationLocalizer localizer)
+            IApplicationLocalizer localizer,
+            IClientInfoHelper clientInfoHelper)
         {
             _logger = logger;
             _eventNotificationService = eventNotificationService;
@@ -76,6 +78,7 @@ namespace SimpleIAM.PasswordlessLogin.Orchestrators
             _signInService = signInService;
             _applicationService = applicationService;
             _localizer = localizer;
+            _clientInfoHelper = clientInfoHelper;
         }
 
         public async Task<WebStatus> RegisterAsync(RegisterInputModel model)
@@ -293,7 +296,12 @@ namespace SimpleIAM.PasswordlessLogin.Orchestrators
                 case CheckOneTimeCodeStatusCode.VerifiedWithNonce:
                 case CheckOneTimeCodeStatusCode.VerifiedWithoutNonce:
                     var nonceWasValid = response.Status.StatusCode == CheckOneTimeCodeStatusCode.VerifiedWithNonce;
-                    await _eventNotificationService.NotifyEventAsync(model.Username, EventType.SignInSuccess, SignInType.OneTimeCode.ToString());
+                    await _eventNotificationService.NotifyEventAsync(new NotifyEventModel()
+                    {
+                        UserName = model.Username, EventType = EventType.SignInSuccess,
+                        Details = SignInType.OneTimeCode.ToString(),
+                        IpAddress = _clientInfoHelper.GetClientInfo().IpAddress
+                    });
                     return await SignInAndRedirectAsync(SignInMethod.OneTimeCode, model.Username, model.StaySignedIn, response.Result.RedirectUrl, nonceWasValid);
                 case CheckOneTimeCodeStatusCode.Expired:
                     await _eventNotificationService.NotifyEventAsync(model.Username, EventType.SignInFail, SignInType.OneTimeCode.ToString());

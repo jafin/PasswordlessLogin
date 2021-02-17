@@ -20,7 +20,7 @@ namespace PasswordlessLogin.Tests.Services.SigninService
         [InlineData("amc")]
         public async Task SignInAsyncShouldHaveClaimType(string claimType)
         {
-            string subjectId = Guid.NewGuid().ToString();
+            var subjectId = Guid.NewGuid().ToString();
             var service = new PasswordlessSignInService(_httpContextAccessor);
             const string username = "user@domain.com";
             var authenticationMethods = new List<string> {"pwd"};

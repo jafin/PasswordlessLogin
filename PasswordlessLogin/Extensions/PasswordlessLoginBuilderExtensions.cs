@@ -54,6 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddTransient<IMessageService, MessageService>();
             services.TryAddTransient<ISignInService, PasswordlessSignInService>();
             services.TryAddTransient<IApplicationService, NonexistantApplicationService>();
+            services.TryAddTransient<IClientInfoHelper, ClientInfoHelper>();
 
             services.TryAddSingleton<IPasswordHashService>(
                 new AspNetIdentityPasswordHashService(PasswordlessLoginConstants.Security.DefaultPbkdf2Iterations));

@@ -9,5 +9,6 @@ namespace SimpleIAM.PasswordlessLogin.Services.EventNotification
     public interface IEventNotificationService
     {
         Task<Status> NotifyEventAsync(string username, string eventType, string details = null);
+        Task<Status> NotifyEventAsync(NotifyEventModel notifyEvent);
     }
 }

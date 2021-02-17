@@ -12,5 +12,6 @@ namespace SimpleIAM.PasswordlessLogin.Entities
         public string Username { get; set; }
         public string EventType { get; set; }
         public string Details { get; set; }
+        public string IpAddress { get; set; }
     }
 }
